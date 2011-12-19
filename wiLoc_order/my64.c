@@ -5,7 +5,7 @@
 void main()
 {
 //
-	//hello?
+	//hello,world
 //	unsigned long long a=0x00ffffffffffffff;
 //	printf("%lld sizeof:%d\n",a,sizeof(long long int));
 /*	long long int x=0x00ffffffffffffff;
