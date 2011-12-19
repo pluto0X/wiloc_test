@@ -1,0 +1,5 @@
+#!/bin/bash
+rm ./log/*
+rm ./idx/*
+rm ./idx_1/*
+rm ./ord/*

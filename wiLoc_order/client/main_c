@@ -1,0 +1,50 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include "wifi_status.h"
+#include "report.h"
+int main(int argc,char* argv[]){
+    if(argc<3){
+	printf("usage %s command posID\n",argv[0]);
+	exit(1);
+    }
+    int command, posID;
+    int AP_num,i;
+    AP_info info[100];
+/*    AP_num=wifi_status(info);
+    fprintf(stderr,"number of AP is %d\n",AP_num);
+    int delta[20];
+    memset(delta,0,20);
+  */  	//antique test without wifi pot,read 1 101 1.info
+	printf("mark1\n");
+	FILE *fp=fopen(argv[3],"r");
+	printf("fp:%x\n",fp);
+	if(fp==NULL)
+	{
+		printf("read error\n");
+		return;
+	}
+	printf("%s opened\n",argv[3]);
+        long long int mac;
+	int quality=0;
+	int level=0;
+	AP_num=0;
+	printf("mark2\n");
+	while(fscanf(fp,"%lld: %d %d",&mac,&quality,&level)!=EOF){
+        	info[AP_num].mac=mac;
+        	info[AP_num].quality=quality;
+        	info[AP_num].level=level;
+        	AP_num++;
+    	}
+	
+	printf("fp:%x\n",fp);
+	fclose(fp);
+//
+	printf("mark3\n");
+    for(i=0;i<AP_num;i++){
+	printf("%lld: %d %d\n",info[i].mac,info[i].quality,info[i].level);
+    }
+    command=atoi(argv[1]);
+    posID=atoi(argv[2]);
+    report(info,AP_num,command,posID);
+}
